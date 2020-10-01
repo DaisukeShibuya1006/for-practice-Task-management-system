@@ -1,0 +1,19 @@
+<%= form_for (@task) do |f| %>
+   <%= f.label :タイトル %>
+   <%= f.text_field :title %><br>
+
+   <%= f.label :テキスト %>
+   <%= f.text_field :text %><br>
+
+   <%= f.label :期限 %>
+   <%= f.text_field :deadline %><br>
+
+   <p>タスクの優先度を選んでください</p>
+   <%= f.select :priority, [["高","高"],["中","中"],["低","低"]], include_blank: "選択して下さい" %>
+
+   <p>タスクの種類を選択してください</p>
+   <%= f.select :priority, [["仕事","仕事"],["プライベート","プライベート"]], include_blank: "選択して下さい" %>
+   
+   <%= f.submit "作成する" %>
+
+<% end %>

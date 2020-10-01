@@ -1,9 +1,11 @@
 <h1>Tasks#index</h1>
 <p>Find me in app/views/tasks/index.html.erb</p>
 
-<% @task.each do |task| %>
+<% @tasks.each do |task| %>
    <%= task.title %>
    <%= task.text %>
    <%= task.deadline %>
-   <%= task.user_id %>
+   <%= task.user_id %><br>
 <% end %>
+
+<%= link_to "タスク登録", new_task_path %>
