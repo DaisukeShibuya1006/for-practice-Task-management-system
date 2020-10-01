@@ -5,6 +5,7 @@
 <% @tasks.each do |task| %>
    <%= task.title %>
    <%= task.text %>
+   <%= task.created_at %>
    <%= task.deadline %>
    <%= task.user_id %>
    <%= link_to "詳細", task_path(task.id) %>

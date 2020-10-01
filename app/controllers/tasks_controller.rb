@@ -22,7 +22,7 @@ class TasksController < ApplicationController
       redirect_to tasks_path
     else
       flash[:alert] = "タスクの登録が失敗しました。"
-      redirect_to tasks_new_path
+      render "new"
     end
   end
 
