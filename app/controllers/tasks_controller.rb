@@ -32,12 +32,20 @@ class TasksController < ApplicationController
       redirect_to tasks_path
       flash[:notice] = "タスクを変更しました。"
     else
-      flash[:alert] = "タスクの変更失敗しました。"
+      flash[:alert] = "タスクの変更に失敗しました。"
     end
   end
   
 
   def destroy
+    @task = Task.find(params[:id])
+    if @task.destroy
+      redirect_to tasks_path
+      flash[:notice]= "タスクを削除しました。"
+    else
+      flash[:alert] = "タスクの削除に失敗しました。"
+      redirect_to tasks_path
+    end
   end
 
    private 
