@@ -9,7 +9,7 @@
    <%= task.deadline %>
    <%= task.user_id %>
    <%= link_to "詳細", task_path(task.id) %>
-   <%= link_to "削除", task_path(task.id), method: :delete %>
+   <%= link_to "削除", task_path(task.id), method: :delete %><br>
 <% end %>
 
 <%= link_to "登録", new_task_path %>
