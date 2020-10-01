@@ -1,6 +1,6 @@
 FactoryBot.define do
     factory :task do
-      title {'テストタイトル'}
-      text {'テストテキスト'}
+      title {'Test tilte'}
+      text {'Test text'}
     end
 end
