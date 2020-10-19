@@ -1,16 +1,4 @@
-Task.create(title: '部屋の掃除', status: 0)
-Task.create(title: '勉強',status: 0)
-Task.create(title: '買い物',status: 0)
-Task.create(title: '役所に行く',status: 0)
-Task.create(title: 'お弁当を作る',status: 0)
-Task.create(title: '友人と会う',status: 0)
-Task.create(title: 'ゴルフに行く',status: 2)
-Task.create(title: '野球観戦',status: 1)
-Task.create(title: '部屋の掃除2',status: 0)
-Task.create(title: '勉強2',status: 0)
-Task.create(title: '買い物2',status: 0)
-Task.create(title: '役所に行く2',status: 0)
-Task.create(title: 'お弁当を作る2',status: 2)
-Task.create(title: '友人と会う2',status: 1)
-Task.create(title: 'ゴルフに行く2',status: 0)
-Task.create(title: '野球観戦2',status: 2)
+
+10000.times do |n|
+   Task.create(title: "test#{n+1}", status: rand(0..2))
+end
