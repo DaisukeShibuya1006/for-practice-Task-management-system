@@ -13,5 +13,4 @@ class Task < ApplicationRecord
         middle: 1,
         low: 2
     }
-
 end
