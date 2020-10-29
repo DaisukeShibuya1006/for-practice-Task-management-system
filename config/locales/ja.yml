@@ -1,11 +1,11 @@
 ja:
-  activerecord:
-    models:
-      task: タスク
-    attributes:
-      task:
-        title: タイトル 
-        text: 詳細
-        created_at: 作成日 
-        status: 期限
-        
+  enums:
+    task:
+      status:
+        yet: "未着手"
+        doing: "着手"
+        complete: "完了"
+      priority:
+        High: "高"
+        middle: "中"
+        low: "低" 

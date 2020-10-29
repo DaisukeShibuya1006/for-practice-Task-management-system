@@ -1,0 +1,12 @@
+<h1>検索結果</h1>
+<%= link_to "戻る", tasks_path %><br>
+  <% @tasks.each do |task| %>
+    タイトル<%= task.title %><br>
+    内容：<%= task.text %><br>
+    作成日:<%= task.created_at %><br>
+    期限:<%= task.deadline %><br>
+    状態:<%= task.status_i18n %><br>
+    進捗:<%= task.priority_i18n %><br>
+    <%= link_to "詳細", task_path(task.id) %><br>
+    <%= link_to "削除", task_path(task.id), method: :delete %><br>
+  <% end %>

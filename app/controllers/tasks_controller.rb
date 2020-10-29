@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all.order('deadline ASC')
+    @tasks = Task.all
   end
 
   def show
@@ -13,6 +13,22 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
+  end 
+
+  def search_title
+    if params[:title].present?
+      @tasks = Task.where('title LIKE ?', "%#{params[:title]}%")
+    else
+      @tasks = Task.none
+    end
+  end
+
+  def search_status
+    if params[:status].present?
+      @tasks = Task.where('cast(status as text) LIKE ?', "%#{params[:status]}%")
+    else
+      @tasks = Task.none
+    end
   end
 
   def create
