@@ -7,10 +7,13 @@ class Task < ApplicationRecord
         doing: 1,
         complete: 2
     }
-    
+
+    #このステップより前のステップで下記を記述しました。
+    #（下記５行）
     enum priority: {
         High: 0,
         middle: 1,
         low: 2
     }
+
 end

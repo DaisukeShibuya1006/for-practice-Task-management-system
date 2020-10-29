@@ -9,8 +9,11 @@
       <%= f.label :期限 %>
       <%= f.text_field :deadline %><br>
 
-       <p>進捗</p>
+      <p>進捗</p>
       <%= f.select :status, Task.statuses.keys.map {|k| [Task.statuses_i18n[k],k]} %>
+      
+      <p>優先度</p>
+      <%= f.select :priority, Task.priorities.keys.map {|k| [Task.priorities_i18n[k],k]} %>
 
       <%= f.submit "作成する" %>
 
