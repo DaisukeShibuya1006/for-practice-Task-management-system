@@ -6,6 +6,6 @@ ja:
         doing: "着手"
         complete: "完了"
       priority:
-        High: "高"
+        high: "高"
         middle: "中"
-        low: "低" 
+        low: "低"
