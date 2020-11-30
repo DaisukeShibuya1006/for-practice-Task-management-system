@@ -13,7 +13,7 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
-  end 
+  end
 
   def search_title
     if params[:title].present?
