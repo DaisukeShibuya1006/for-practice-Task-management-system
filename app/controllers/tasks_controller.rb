@@ -3,7 +3,7 @@ class TasksController < ApplicationController
     @tasks = params[:title].present? ? Task.where('title LIKE ?', "%#{params[:title]}%") : Task.all
     if params[:status].present?
       @tasks = @tasks.where('status::text LIKE ?', "%#{params[:status]}%")
-    elsif params[:status] == ''
+    else
       @tasks.all
     end
     priority_sort(params[:keyword])
