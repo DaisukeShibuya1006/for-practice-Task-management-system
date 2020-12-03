@@ -59,7 +59,7 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :text, :deadline, :status, :priority)
   end
 
-  def priority_sort(_high_low)
+  def priority_sort
     @tasks = if params[:keyword] == 'high'
                @tasks.order('priority')
              elsif params[:keyword] == 'low'
