@@ -1,11 +1,7 @@
 class TasksController < ApplicationController
   def index
     @tasks = params[:title].present? ? Task.where('title LIKE ?', "%#{params[:title]}%") : Task.all
-    if params[:status].present?
-      @tasks = @tasks.where('status::text LIKE ?', "%#{params[:status]}%")
-    else
-      @tasks.all
-    end
+    @tasks = params[:status].present? ? @tasks.where('status::text LIKE ?', "%#{params[:status]}%")
     priority_sort(params[:keyword])
   end
 
