@@ -3,10 +3,10 @@ class TasksController < ApplicationController
     @tasks = params[:title].present? ? Task.where('title LIKE ?', "%#{params[:title]}%") : Task.all
     if params[:status].present?
       @tasks = @tasks.where('status::text LIKE ?', "%#{params[:status]}%")
-    elsif params[:status] == ""
+    elsif params[:status] == ''
       @tasks.all
     end
-      priority_sort(params[:keyword])
+    priority_sort(params[:keyword])
   end
 
   def show
@@ -59,13 +59,13 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :text, :deadline, :status, :priority)
   end
 
-  def priority_sort(high_low)
-    if params[:keyword] == 'high'
-      @tasks = @tasks.order('priority')
-    elsif params[:keyword] == 'low'
-      @tasks = @tasks.order('priority DESC')
-    else
-      @tasks = @tasks.order('created_at DESC')
-    end
+  def priority_sort(_high_low)
+    @tasks = if params[:keyword] == 'high'
+               @tasks.order('priority')
+             elsif params[:keyword] == 'low'
+               @tasks.order('priority DESC')
+             else
+               @tasks.order('created_at DESC')
+             end
   end
 end
