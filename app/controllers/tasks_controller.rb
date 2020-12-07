@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   def index
-    tasks_search
+    title_search
+    status_search
     priority_sort
   end
 
@@ -65,8 +66,11 @@ class TasksController < ApplicationController
              end
   end
 
-  def tasks_search
+  def title_search
     @tasks = params[:title].present? ? Task.where('title LIKE ?', "%#{params[:title]}%") : Task.all
+  end
+
+  def status_search
     @tasks = @tasks.where('status::text LIKE ?', "%#{params[:status]}%") if params[:status].present?
   end
 end
