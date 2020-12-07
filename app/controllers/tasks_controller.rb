@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   def index
     @tasks = params[:title].present? ? Task.where('title LIKE ?', "%#{params[:title]}%") : Task.all
-    @tasks = params[:status].present? ? @tasks.where('status::text LIKE ?', "%#{params[:status]}%")
+    @tasks = @tasks.where('status::text LIKE ?', "%#{params[:status]}%") if params[:status].present?
     priority_sort(params[:keyword])
   end
 
@@ -55,13 +55,13 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :text, :deadline, :status, :priority)
   end
 
-  def priority_sort
+  def priority_sort(high_low)
     @tasks = if params[:keyword] == 'high'
-               @tasks.order('priority')
-             elsif params[:keyword] == 'low'
-               @tasks.order('priority DESC')
-             else
-               @tasks.order('created_at DESC')
-             end
+      @tasks.order('priority')
+    elsif params[:keyword] == 'low'
+      @tasks.order('priority DESC')
+    else
+      @tasks.order('created_at DESC')
+    end
   end
 end
