@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   def index
     title_search
     status_search
-    priority_sort
+    tasks_sort
   end
 
   def show
@@ -55,7 +55,7 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :text, :deadline, :status, :priority)
   end
 
-  def priority_sort
+  def tasks_sort
     @tasks = case params[:keyword]
              when 'high'
                @tasks.order('priority')
@@ -71,6 +71,6 @@ class TasksController < ApplicationController
   end
 
   def status_search
-    @tasks = @tasks.where('status::text LIKE ?', "%#{params[:status]}%") if params[:status].present?
+    @tasks = @tasks.where('status = ?', "#{params[:status]}") if params[:status].present?
   end
 end
