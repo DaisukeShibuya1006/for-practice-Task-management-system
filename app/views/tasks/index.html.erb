@@ -6,10 +6,10 @@
    <%= f.text_field :title, value: params[:title] %>
 
    <%= f.label :進捗 %>
-   <%= f.select :status, options_for_select([["未選択",""],["未着手","0"],["着手","1"],["完了","2"]])%>
+   <%= f.select :status, options_for_select([["未選択",""],["未着手","0",],["着手","1"],["完了","2"]], selected: params[:status])%>
 
    <%= f.label :優先度 %>
-   <%= f.select :keyword, [['未選択', ''],['高', 'high'], ['低', 'low']] %>
+   <%= f.select :keyword, [['未選択', ''],['高', 'high'], ['低', 'low']], selected: params[:keyword]%>
 
    <%= f.submit :検索 %>
 <% end %>
