@@ -55,6 +55,8 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :text, :deadline, :status, :priority)
   end
 
+  # 優先順位を並べ替えるソートメソッドです
+  # @tasksが返り値になります
   def tasks_sort
     @tasks = case params[:keyword]
              when 'high'
