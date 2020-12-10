@@ -55,8 +55,20 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :text, :deadline, :status, :priority)
   end
 
-  # 優先順位を並べ替えるソートメソッドです
-  # @tasksが返り値になります
+  # タスクをタイトルで検索する
+  # @return[Object] タイトル検索の結果
+  def title_search
+    @tasks = params[:title].present? ? Task.where('title LIKE ?', "%#{params[:title]}%") : Task.all
+  end
+
+  # タスクをステータスで検索する
+  # @return[Object] ステータス検索の結果
+  def status_search
+    @tasks = @tasks.where('status = ?', params[:status]) if params[:status].present?
+  end
+
+  # タスクを優先順位でソートする
+  # @return[Object] 優先順位のソート結果
   def tasks_sort
     @tasks = case params[:keyword]
              when 'high'
@@ -66,13 +78,5 @@ class TasksController < ApplicationController
              else
                @tasks.order('created_at DESC')
              end
-  end
-
-  def title_search
-    @tasks = params[:title].present? ? Task.where('title LIKE ?', "%#{params[:title]}%") : Task.all
-  end
-
-  def status_search
-    @tasks = @tasks.where('status = ?', params[:status]) if params[:status].present?
   end
 end
