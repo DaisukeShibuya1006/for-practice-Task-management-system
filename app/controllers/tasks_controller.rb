@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    title_search
+    status_search
+    tasks_sort
   end
 
   def show
@@ -13,22 +15,6 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find(params[:id])
-  end 
-
-  def search_title
-    if params[:title].present?
-      @tasks = Task.where('title LIKE ?', "%#{params[:title]}%")
-    else
-      @tasks = Task.none
-    end
-  end
-
-  def search_status
-    if params[:status].present?
-      @tasks = Task.where('cast(status as text) LIKE ?', "%#{params[:status]}%")
-    else
-      @tasks = Task.none
-    end
   end
 
   def create
@@ -67,5 +53,31 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title, :text, :deadline, :status, :priority)
+  end
+
+  # タスクをタイトルで検索する
+  # @return[Object] タイトル検索の結果
+  def title_search
+    @tasks = params[:title].present? ? Task.where('title LIKE ?', "%#{params[:title]}%") : Task.all
+  end
+
+  # タスクをステータスで検索する
+  # @return[Object] ステータス検索の結果
+  def status_search
+    @tasks = @tasks.where('status = ?', params[:status]) if params[:status].present?
+  end
+
+  # タスクを優先度でソートする
+  # 優先度が未選択なら、作成日時で降順させる
+  # @return[Object] 優先順位のソート結果
+  def tasks_sort
+    @tasks = case params[:keyword]
+             when 'high'
+               @tasks.order('priority')
+             when 'low'
+               @tasks.order('priority DESC')
+             else
+               @tasks.order('created_at DESC')
+             end
   end
 end

@@ -1,27 +1,43 @@
 <h1>Tasks list</h1>
 <%= link_to "登録", new_task_path %><br>
 
-<%= form_with url: search_title_path, method: :get, local: true do |f|%>
-  <%= f.text_field :title %>
-  <%= f.submit :search %>
+<%= form_with url: index_path, method: :get, local: true do |f|%>
+   <%= f.label :タイトル %>
+   <%= f.text_field :title, value: params[:title] %>
+
+   <%= f.label :進捗 %>
+   <%= f.select :status, options_for_select([["未選択",""],["未着手","0",],["着手","1"],["完了","2"]], selected: params[:status])%>
+
+   <%= f.label :優先度 %>
+   <%= f.select :keyword, [['未選択', ''],['高', 'high'], ['低', 'low']], selected: params[:keyword]%>
+
+   <%= f.submit :検索 %>
 <% end %>
 
-<%= form_tag(search_status_path, method: :get) do |f|%>
-   <%= select_tag(:status, options_for_select([["未着手","0"],["着手","1"],["完了","2"]])) %>
-   <%= submit_tag "絞り込み" %>
-<% end %><br>
-
-
-<% @tasks.each do |task| %>
-   タイトル<%= task.title %><br>
-   内容：<%= task.text %><br>
-   作成日:<%= task.created_at %><br>
-   期限:<%= task.deadline %><br>
-   状態:<%= task.status_i18n %><br>
-   進捗:<%= task.priority_i18n %><br>
-   <%= link_to "詳細", task_path(task.id) %>
-   <%= link_to "削除", task_path(task.id), method: :delete %><br><br>
-<% end %>
-
-  
+<table>
+      <thead>
+         <tr>
+            <th>タイトル</th>
+            <th>内容</th>
+            <th>作成日</th>
+            <th>期限</th>
+            <th>進捗</th>
+            <th>優先度</th>
+         </tr>
+      </thead>
+   <tbody>
+      <% @tasks.each do |task| %>
+         <tr>
+            <td><%= task.title %></td>
+            <td><%= task.text %></td>
+            <td><%= task.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= task.deadline&.strftime('%Y/%m/%d')  %></td>
+            <td><%= task.status_i18n %></td>
+            <td><%= task.priority_i18n %></td>
+            <td><%= link_to "詳細", task_path(task.id) %></td>
+            <td><%= link_to "削除", task_path(task.id), method: :delete %></td>
+         </tr>
+      <% end %>
+   </tbody>
+</table>
 

@@ -1,18 +1,20 @@
- <%= form_for (@task) do |f| %>
-   <%= render 'layouts/error_messages'%>
- <%= f.label :タイトル %>
+<%= form_for (@task) do |f| %>
+    <%= render 'layouts/error_messages'%>
+      <%= f.label :タイトル %>
       <%= f.text_field :title %><br>
 
-      <%= f.label :テキスト %>
+      <%= f.label :内容 %>
       <%= f.text_field :text %><br>
 
       <%= f.label :期限 %>
       <%= f.text_field :deadline %><br>
 
-       <p>進捗</p>
+      <%= f.label :進捗 %>
       <%= f.select :status, Task.statuses.keys.map {|k| [Task.statuses_i18n[k],k]} %>
 
-      <%= f.submit "作成する" %>
+      <%= f.label :優先度 %>
+      <%= f.select :priority, Task.priorities.keys.map {|k| [Task.priorities_i18n[k],k]} %><br>
 
-   <% end %>
+      <%= f.submit "作成する" %>
+<% end %>
 
