@@ -73,6 +73,6 @@ class TasksController < ApplicationController
   end
 
   def status_search
-    @tasks = @tasks.where('status = ?', "#{params[:status]}") if params[:status].present?
+    @tasks = @tasks.where('status = ?', params[:status]) if params[:status].present?
   end
 end
