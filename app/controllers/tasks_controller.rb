@@ -58,7 +58,8 @@ class TasksController < ApplicationController
   # タスクをタイトルで検索する
   # @return[Object] タイトル検索の結果
   def title_search
-    @tasks = params[:title].present? ? Task.where('title LIKE ?', "%#{params[:title]}%").page(params[:page]).per(5) : Task.page(params[:page]).per(5)
+    @tasks = params[:title].present? ? Task.where('title LIKE ?', "%#{params[:title]}%") : Task.all
+    @tasks = @tasks.page(params[:page]).per(5)
   end
 
   # タスクをステータスで検索する
