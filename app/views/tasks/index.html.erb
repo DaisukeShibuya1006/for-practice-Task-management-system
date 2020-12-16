@@ -1,6 +1,7 @@
+<div class="container">
 <h1>Tasks list</h1>
 <%= link_to "登録", new_task_path %><br>
-
+</div>
 <%= form_with url: index_path, method: :get, local: true do |f|%>
    <%= f.label :タイトル %>
    <%= f.text_field :title, value: params[:title] %>
@@ -13,8 +14,10 @@
 
    <%= f.submit :検索 %>
 <% end %>
+</div>
 
-<table>
+<div class="container">
+<table class="table">
       <thead>
          <tr>
             <th>タイトル</th>
@@ -27,17 +30,17 @@
       </thead>
    <tbody>
       <% @tasks.each do |task| %>
-         <tr>
-            <td><%= task.title %></td>
+         <tr scope="row">
+            <td><%= link_to task_path(task.id)do %><%= task.title %><% end %></td>
             <td><%= task.text %></td>
             <td><%= task.created_at.strftime('%Y/%m/%d') %></td>
             <td><%= task.deadline&.strftime('%Y/%m/%d')  %></td>
             <td><%= task.status_i18n %></td>
             <td><%= task.priority_i18n %></td>
-            <td><%= link_to "詳細", task_path(task.id) %></td>
             <td><%= link_to "削除", task_path(task.id), method: :delete %></td>
          </tr>
       <% end %>
    </tbody>
 </table>
+</div>
 <%= paginate @tasks %>
