@@ -20,10 +20,10 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      flash[:notice] = 'タスクを登録しました。'
+      flash.now[:success] = 'タスクを登録しました。'
       redirect_to tasks_path
     else
-      flash[:alert] = 'タスクの登録が失敗しました。'
+      flash.now[:danger] = 'タスクの登録が失敗しました。'
       render 'new'
     end
   end
@@ -32,9 +32,9 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     if @task.update(task_params)
       redirect_to tasks_path
-      flash[:notice] = 'タスクを変更しました。'
+      flash.now[:success] = 'タスクを変更しました。'
     else
-      flash[:alert] = 'タスクの変更に失敗しました。'
+      flash.now[:danger] = 'タスクの変更に失敗しました。'
     end
   end
 
@@ -42,9 +42,9 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     if @task.destroy
       redirect_to tasks_path
-      flash[:notice] = 'タスクを削除しました。'
+      flash.now[:success] = 'タスクを削除しました。'
     else
-      flash[:alert] = 'タスクの削除に失敗しました。'
+      flash.now[:danger] = 'タスクの削除に失敗しました。'
       redirect_to tasks_path
     end
   end
