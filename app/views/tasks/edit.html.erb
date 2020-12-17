@@ -1,19 +1,28 @@
-<%= form_for (@task) do |f| %>
-   <%= f.label :タイトル %>
-   <%= f.text_field :title %><br>
-
-   <%= f.label :テキスト %>
-   <%= f.text_field :text %><br>
-
-   <%= f.label :期限 %>
-   <%= f.text_field :deadline %><br>
-
-   <p>タスクの優先度を選んでください</p>
-   <%= f.select :priority, [["高","高"],["中","中"],["低","低"]], include_blank: "選択して下さい" %>
-
-   <p>タスクの種類を選択してください</p>
-   <%= f.select :priority, [["仕事","仕事"],["プライベート","プライベート"]], include_blank: "選択して下さい" %>
-   
-   <%= f.submit "作成する" %>
-
-<% end %>
+<div class="container text-center">
+    <%= form_for (@task) do |f| %>
+      <%= render 'layouts/error_messages'%>
+        <div class="form-row">
+            <div class="col-6">
+                <%= f.label :タイトル %>
+                <%= f.text_field :title ,class: "form-control", placeholder: "タイトル入力は必須項目です。"%>
+            </div>
+            <div class="col-6">
+                <%= f.label :内容 %>
+                <%= f.text_field :text ,class: "form-control"%>
+            </div>
+            <div class="col-2">
+                <%= f.label :期限 %>
+                <%= f.text_field :deadline ,class: "form-control"%>
+            </div>
+            <div class="col-2">
+                <%= f.label :進捗 %>
+                <%= f.select :status, Task.statuses.keys.map {|k| [Task.statuses_i18n[k],k]}, {}, {class: "form-control"} %>
+            </div>
+            <div class="col-2">
+                <%= f.label :優先度 %>
+                <%= f.select :priority, Task.priorities.keys.map {|k| [Task.priorities_i18n[k],k]},{}, {class: "form-control"} %><br>
+            </div>
+        </div>
+          <%= f.submit "更新" ,class: "btn btn-primary"%>
+    <% end %>
+</div>
