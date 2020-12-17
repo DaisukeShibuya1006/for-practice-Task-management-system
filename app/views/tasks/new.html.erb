@@ -1,4 +1,5 @@
 <div class="container text-center">
+    <%= link_to "戻る", :back ,class: 'btn btn-secondary' %>
     <%= form_for (@task) do |f| %>
       <%= render 'layouts/error_messages'%>
         <div class="form-row">
