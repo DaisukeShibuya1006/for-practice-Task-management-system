@@ -1,4 +1,8 @@
 ja:
+  attributes:
+    task:
+    title: "タイトル"
+    text: "内容"
   views:
     pagination:
       first: "最初"
@@ -8,6 +12,7 @@ ja:
       truncate: "..."
   enums:
     task:
+      title: "タイトル"
       status:
         yet: "未着手"
         doing: "着手"
