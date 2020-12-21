@@ -1,5 +1,4 @@
 <div class="container-fluid text-center">
-    <%= link_to "戻る", :back ,class: 'btn btn-secondary' %>
       <%= form_for (@task) do |f| %>
             <%= render 'layouts/error_messages'%>
         <div class="form-row">
@@ -26,4 +25,5 @@
         </div>
       <%= f.submit "作成" ,class: "btn btn-primary"%>
     <% end %>
+    <%= link_to "戻る", 'javascript:history.back()' ,class: 'btn btn-secondary' %>
 </div>
