@@ -1,5 +1,6 @@
 <div class="container-fluid text-center">
-      <%= form_for (@task) do |f| %>
+  <%= link_to "戻る", 'javascript:history.back()' ,class: 'btn btn-secondary' %>
+    <%= form_for (@task) do |f| %>
             <%= render 'layouts/error_messages'%>
         <div class="form-row">
             <div class="col-12">
