@@ -1,20 +1,29 @@
-<%= form_for (@task) do |f| %>
-    <%= render 'layouts/error_messages'%>
-      <%= f.label :タイトル %>
-      <%= f.text_field :title %><br>
-
-      <%= f.label :内容 %>
-      <%= f.text_field :text %><br>
-
-      <%= f.label :期限 %>
-      <%= f.text_field :deadline %><br>
-
-      <%= f.label :進捗 %>
-      <%= f.select :status, Task.statuses.keys.map {|k| [Task.statuses_i18n[k],k]} %>
-
-      <%= f.label :優先度 %>
-      <%= f.select :priority, Task.priorities.keys.map {|k| [Task.priorities_i18n[k],k]} %><br>
-
-      <%= f.submit "作成する" %>
-<% end %>
-
+<div class="container-fluid text-center">
+      <%= form_for (@task) do |f| %>
+            <%= render 'layouts/error_messages'%>
+        <div class="form-row">
+            <div class="col-12">
+                <%= f.label :タイトル %>
+                <%= f.text_field :title ,class: "form-control", placeholder: "タイトル入力は必須項目です。"%>
+            </div>
+            <div class="col-12">
+                <%= f.label :内容 %>
+                <%= f.text_area :text ,class: "form-control"%>
+            </div>
+            <div class="col-4">
+                <%= f.label :期限 %>
+                <%= f.text_field :deadline ,class: "form-control"%>
+            </div>
+            <div class="col-4">
+                <%= f.label :進捗 %>
+                <%= f.select :status, Task.statuses.keys.map {|k| [Task.statuses_i18n[k],k]}, {}, {class: "form-control"} %>
+            </div>
+            <div class="col-4">
+                <%= f.label :優先度 %>
+                <%= f.select :priority, Task.priorities.keys.map {|k| [Task.priorities_i18n[k],k]},{}, {class: "form-control"} %><br>
+            </div>
+        </div>
+      <%= f.submit "作成" ,class: "btn btn-primary"%>
+    <% end %>
+    <%= link_to "戻る", 'javascript:history.back()' ,class: 'btn btn-secondary' %>
+</div>

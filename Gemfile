@@ -65,3 +65,6 @@ gem 'rails-i18n'
 gem 'enum_help'
 
 gem 'kaminari'
+
+gem 'bootstrap'
+gem 'jquery-rails'

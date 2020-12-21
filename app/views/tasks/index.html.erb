@@ -1,20 +1,26 @@
-<h1>Tasks list</h1>
-<%= link_to "登録", new_task_path %><br>
+<div class="container text-center">
+   <h1 class="app_home_tile">タスク一覧</h1>
+      <div class="tasks_new">
+         <%= link_to "タスク登録", new_task_path, class: 'btn btn-primary' %>
+      </div>
+      <div class="search">
+         <%= form_with url: index_path, method: :get, local: true do |f| %>
+            <%= f.label :タイトル %>
+            <%= f.text_field :title, value: params[:title] %>
 
-<%= form_with url: index_path, method: :get, local: true do |f|%>
-   <%= f.label :タイトル %>
-   <%= f.text_field :title, value: params[:title] %>
+            <%= f.label :進捗 %>
+            <%= f.select :status, options_for_select([["未選択",""],["未着手","0",],["着手","1"],["完了","2"]], selected: params[:status]), {}, {class: "status_select"} %>
 
-   <%= f.label :進捗 %>
-   <%= f.select :status, options_for_select([["未選択",""],["未着手","0",],["着手","1"],["完了","2"]], selected: params[:status])%>
+            <%= f.label :優先度 %>
+            <%= f.select :keyword, options_for_select([['未選択', ''],['高', 'high'], ['低', 'low']], selected: params[:keyword]), {}, {class: "priority_select"} %>
 
-   <%= f.label :優先度 %>
-   <%= f.select :keyword, [['未選択', ''],['高', 'high'], ['低', 'low']], selected: params[:keyword]%>
+            <%= f.submit :検索, class: 'btn btn-primary' %>
+         <% end %>
+      </div>
+</div>
 
-   <%= f.submit :検索 %>
-<% end %>
-
-<table>
+<div class="container">
+   <table class="table table-hover">
       <thead>
          <tr>
             <th>タイトル</th>
@@ -25,19 +31,19 @@
             <th>優先度</th>
          </tr>
       </thead>
-   <tbody>
-      <% @tasks.each do |task| %>
-         <tr>
-            <td><%= task.title %></td>
-            <td><%= task.text %></td>
-            <td><%= task.created_at.strftime('%Y/%m/%d') %></td>
-            <td><%= task.deadline&.strftime('%Y/%m/%d')  %></td>
-            <td><%= task.status_i18n %></td>
-            <td><%= task.priority_i18n %></td>
-            <td><%= link_to "詳細", task_path(task.id) %></td>
-            <td><%= link_to "削除", task_path(task.id), method: :delete %></td>
-         </tr>
-      <% end %>
-   </tbody>
-</table>
+      <tbody>
+         <% @tasks.each do |task| %>
+            <tr scope="row">
+               <td><%= link_to task_path(task.id)do %><%= task.title %><% end %></td>
+               <td><%= task.text %></td>
+               <td><%= task.created_at.strftime('%Y/%m/%d') %></td>
+               <td><%= task.deadline&.strftime('%Y/%m/%d')  %></td>
+               <td><%= task.status_i18n %></td>
+               <td><%= task.priority_i18n %></td>
+               <td><%= link_to "削除", task_path(task.id), method: :delete, data: {confirm: "削除しますか？"} %></td>
+            </tr>
+         <% end %>
+      </tbody>
+   </table>
+</div>
 <%= paginate @tasks %>
