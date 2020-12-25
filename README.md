@@ -1,4 +1,4 @@
-# Task-management-system
+# このリポジトリはカリキュラムの復習や予習を行うためのリポジトリです。
 
 ## 開発言語
 - Ruby(version:2.6.2)
